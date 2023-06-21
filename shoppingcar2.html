@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物网站</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script src="bootstrap3/js/holder.js"></script>
+<link href="bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="bootstrap3/jquery-1.8.3.min.js"></script>
+<script src="bootstrap3/js/bootstrap.js"></script>
+<script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
+<script src="/JavaScript/index.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        showHotList();
+    });
+
+    function showHotList() {
+        $("#car_service").empty();
+        $.ajax({
+            url: "/shopping/selectAll",
+            type: "GET",
+            dataType: "JSON",
+            success: function(json) {
+                var list = json.data;
+                console.log("count=" + list.length);
+                for (var i = 0; i < list.length; i++) {
+                    console.log(list[i]);
+                    var html =
+                '<tr>'+
+                        '<td class="checkbox"><input class="check-one check" type="checkbox" /></td>' +
+                    '<td class="goods"><img src="#{image}" alt="" /><span>#{name}</span></td>'+
+                        ' <td class="price">￥#{price}</td>'+
+                        ' <td class="count">'+
+                        ' <span class="reduce"></span>'+
+                        ' <input class="count-input" type="text" value="1" />'+
+                        '  <span class="add">+</span></td>'+
+                        '<td class="subtotal">￥#{price}</td>'+
+                        ' <td class="operation"><span class="delete">删除</span></td>'+
+                        ' </tr>'
+                    ;
+                    html = html.replace(/#{name}/g, list[i].name);
+                    html = html.replace(/#{price}/g, list[i].price);
+                    html = html.replace(/#{image}/g, list[i].img);
+
+                    $("#car_service").append(html);
+                }
+            }
+        });
+    }
+</script>
+
+<body>
+<section class = "cutshort">
+    <!-- 加一个版心，放在版心里 -->
+    <div class="w">
+        <div class="fl">
+            <ul>
+                <li>YTU欢迎您! &nbsp;</li>
+                <li>
+                    <a href="">请登录</a>
+                    <a href="Registe.jsp" class="font_style_red">免费注册</a>
+                </li>
+            </ul>
+        </div>
+        <div class="fr">
+            <ul>
+                <li>我的订单</li>
+                <li></li>
+                <li class="arrow-icon">我的YTU</li>
+                <li></li>
+                <li>YTU会员</li>
+                <li></li>
+                <li>企业采购</li>
+                <li></li>
+                <li>关注YTU</li>
+                <li></li>
+                <li>客户服务</li>
+                <li></li>
+                <li>网站导航</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="header w" >
+    <a href="index.jsp">
+        <div class="logo">
+            <img src="img/logo.webp" alt="">
+        </div>
+    </a>
+
+    <div class="search">
+        <input type="text" placeholder = "请输入要搜索的内容">
+        <button style="border: 0px;">搜索</button>
+    </div>
+</div>
+<div class="mainmian">
+<table id="cartTable">
+    <thead>
+    <tr>
+        <th><label><input class="check-all check" type="checkbox" style="width: 60px;"/>&nbsp;全选</label></th>
+        <th>商品</th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>小计</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="car_service">
+    <tr>
+        <td class="checkbox"><input class="check-one check" type="checkbox" /></td>
+        <td class="goods"><img src="images/1.jpg" alt="" /><span>Casio/卡西欧 EX-TR350</span></td>
+        <td class="price">5999.88</td>
+        <td class="count">
+            <span class="reduce"></span>
+            <input class="count-input" type="text" value="1" />
+            <span class="add">+</span></td>
+        <td class="subtotal">5999.88</td>
+        <td class="operation"><span class="delete">删除</span></td>
+    </tr>
+    <tr>
+        <td class="checkbox"><input class="check-one check" type="checkbox" /></td>
+        <td class="goods"><img src="images/2.jpg" alt="" /><span>Canon/佳能 PowerShot SX50 HS</span></td>
+        <td class="price">3888.50</td>
+        <td class="count"><span class="reduce"></span><input class="count-input" type="text" value="1" /><span class="add">+</span></td>
+        <td class="subtotal">3888.50</td>
+        <td class="operation"><span class="delete">删除</span></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<div class="foot" id="foot">
+    <label class="fl select-all"><input type="checkbox" class="check-all check"/>&nbsp;全选</label>
+    <a class="fl delete" id="deleteAll" href="javascript:;">删除</a>
+    <a class="fr closing" href="index.html" id="btn-create-order">清空购物车</a>
+    <div class="fr total">合计：￥<span id="priceTotal">0.00</span></div>
+    <div class="fr selected" id="selected">已选商品
+        <span id="selectedTotal">0</span>件
+    </div>
+    <div class="selected-view">
+        <div id="selectedViewList" class="clearfix">
+            <!--<div><img src="images/1.jpg"><span>取消选择</span></div>-->
+        </div>
+        <span class="arrow">◆<span>◆</span></span>
+    </div>
+</div>
+</div>
+<script>
+        $("#btn-create-order").click(function() {
+        $.ajax({
+            url: "/products/create",
+            data: "123",
+            type: "POST",
+            dataType: "String",
+            success: function(json) {
+            alert("创建订单成功！");
+            console.log(json.data);
+        }
+        });
+        });
+</script>
+<script type="text/javascript" src="js/demo.js"></script>
+</body>
+</html>

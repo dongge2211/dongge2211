@@ -1,218 +1,831 @@
-<!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.0 Transitional//EN”>
-<HTML>
- 
-<HEAD>
-    <TITLE> New Document </TITLE>
-    <META NAME=”Generator” CONTENT=”EditPlus”>
-    <META NAME=”Author” CONTENT=””>
-    <META NAME=”Keywords” CONTENT=””>
-    <META NAME=”Description” CONTENT=””>
-    <style>
-        html,
-        body {
- 
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            background: #000;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物网站</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--导入核心文件-->
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script src="bootstrap3/js/holder.js"></script>
+    <link href="bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap3/jquery-1.8.3.min.js"></script>
+    <script src="bootstrap3/js/bootstrap.js"></script>
+    <script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/JavaScript/index.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            showHotList();
+            showHotList1();
+        });
+
+        function showHotList() {
+            $("#hot-list").empty();
+            $.ajax({
+                url: "/products/hot_list",
+                type: "GET",
+                dataType: "JSON",
+                success: function(json) {
+                    var list = json.data;
+                    console.log("count=" + list.length);
+                    for (var i = 0; i < list.length; i++) {
+                        console.log(list[i].title);
+                        var html =  '<a href="shopingcar.html?id=#{id}">'
+                            +  '<li>'
+                            +  '<img src="#{image}" alt="">'
+                            +   '</li>'
+                            +  '</a>';
+                        html = html.replace(/#{image}/g, list[i].image);
+                        html = html.replace(/#{id}/g, list[i].id);
+                        $("#hot-list").append(html);
+                    }
+                }
+            });
         }
- 
-        canvas {
- 
+
+
+        function showHotList1() {
+            $("#selllove").empty();
+            $.ajax({
+                url: "/products/hot_list",
+                type: "GET",
+                dataType: "JSON",
+                success: function(json) {
+                    var list = json.data;
+                    console.log("count=" + list.length);
+                    for (var i = 0; i < list.length; i++) {
+                        console.log(list[i].title);
+                        var html =  '<a href="shopingcar.html?id=#{id}">'
+                            +  '<li>'
+                            +  '<img src="#{image}" alt="">'
+                            +   '</li>'
+                            +  '</a>';
+                        html = html.replace(/#{image}/g, list[i].image);
+                        html = html.replace(/#{id}/g, list[i].id);
+                        $("#selllove").append(html);
+                    }
+                }
+            });
+        }
+
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .rolling{
+            width: 990px;
+            height: 230px;
+            position: relative;
+            overflow: hidden;
+        }
+        .rolling .m_unit{
+            width: 5000px;  /*这是运动的单位，这个宽度随便取，大一点，最少的大于rolling小于运动盒子的内容*/
             position: absolute;
-            width: 100%;
-            height: 100%;
+            left: 0;
+        }
+        .rolling ul{
+            list-style: none;
+        }
+        .rolling ul li{
+            float: left;
+            height: 230px;
+            border-right: 1px solid gainsboro;
+        }
+        .m_unit img {
+            height: 228px;
+        }
+        .alin {
+             position: relative;
+             top: 25px;
+             margin-left: 10px ;
+            float: left;
+            }
+        .alin >img {
+            height: 220px;
+            width: 183px ;
+            float: left;
         }
     </style>
-</HEAD>
+</head>
+<body>
+
+    <div class="mainmian">
+<!-- 首部的制作 start-->
+<section class = "cutshort">
+    <!-- 加一个版心，放在版心里 -->
+    <div class="w">  
+     <div class="fl">
+        <ul>
+            <li>YTU欢迎您! &nbsp;</li>
+            <li>
+                <a href="login1.html">请登录</a>
+                <a href="Registe.html" class="font_style_red">免费注册</a>
+            </li>
+        </ul>
+     </div>
+    <div class="fr">
+      <ul>
+        <li>我的订单</li>
+        <li></li>
+        <li class="arrow-icon">我的YTU</li>
+        <li></li>
+        <li>YTU会员</li>
+        <li></li>
+        <li>企业采购</li>
+        <li></li>
+        <li>关注YTU</li>
+        <li></li>
+        <li>客户服务</li>
+        <li></li>
+        <li>网站导航</li>
+      </ul>
+    </div>
+    </div> 
+</section>
+<!-- 搜索栏的制作 start-->
+<div class="header w" >
+    <div class="logo">
+        <img src="img/logo.webp" alt="">
+    </div>
+    <div class="search">
+        <input type="text" placeholder = "请输入要搜索的内容">
+        <button style="border: 0px
+        ;">搜索</button>
+    </div>
+    <a href="#">
+        <a href="shoppingcar2.html">  <div class="message">
+            我的购物车
+       </div></a>
+      
+       <div class="message1">
+          <i>8</i>
+       </div>
+    </a>
+   
+</div>
+<!-- fixed区域制作 -->
+<div class="main_fixed">
+     <ul>
+        <li>京东 <br> 秒杀</li>
+        <li>特色<br>广场</li>
+        <li>频道<br>广场</li>
+        <li>为你<br>推荐</li>
+        <li>客服</li>
+        <a href="index.html"><li>返回<br>顶部</li></a>
+     </ul>
+</div>
+   <!-- 导航栏制作 start-->
+ <div class="nav w">
+        <ul>
+
+            <li style="margin-right:70px;margin-left:20px" class="nav_all"><a href="">全部商品</a></li>
+
+            <li><a href="">通信</a></li>
+
+            <li><a href="">婴儿用品</a></li>
+
+            <li><a href="">男装</a></li>
+
+            <li><a href="">女装</a></li>
+
+            <li><a href="">家电</a></li>
+
+            <li><a href="">新品</a></li>
+        </ul>
+        
+ </div>
  
-<BODY>
-    <canvas id="pinkboard"></canvas>
+ <!-- 主页制作 -->
+ <div class="main w">
+    <div class="list">
+            <ul>
+                <a href=""><li>书籍</li></a>
+                <a href=""><li>食物、酒</li></a>
+                <a href=""><li>考研、高考必备</li></a>
+                <a href=""><li>婴儿用品</li></a>
+                <a href=""><li>冬季新装上新</li></a>
+                <a href=""><li>手机、数码、通信</li></a>
+                <a href=""><li>男装、女装</li></a>
+                <a href=""><li>童装</li></a>
+                <a href=""><li>办公、家具</li></a>
+                <a href=""><li>理财</li></a>
+                <a href=""><li>新品上新、一元购</li></a>
+                <a href=""><li>亿万补贴</li></a>
+                <a href=""><li>新年囤货、折扣</li></a>
+                <a href=""><li>保健品、回家</li></a>
+                <a href=""><li>汽车</li></a>
+            </ul>
+    </div>
+    <div class="turn">
+         <img src="img/turn4.png" alt=""  id = "turn_imgs">
+         <!-- <iframe  width="749px" height="430px" src="1/slider.html"  frameborder="no"  marginwidth="0" marginheight="0" scrolling="no"></iframe> -->
+
+    </div>
+    <div class="main_right">
+        
+        <div class="main_right_1">
+            <img src="img/ico1.png" alt="" class="main_right_1_picture">
+           <h4> hi~欢迎逛京东</h4>
+           <ul>
+            <a href=""><li class="main_right_1_one">新人福利</li></a>
+            <a href=""><li class="main_right_1_two">PLUS会员</li></a>
+      
+           </ul>
+        </div>
+        <div class="main_right_2">
+            <div class="main_right_2_header">
+                <h3>京东快报</h3>
+                <div class="main_right_2_header_more">
+                    更多>
+                </div>     
+            </div>
+        <div class="main_right_2_body">
+            <ul>
+                <li>
+                    <span>热门</span>
+                    <span>四核战芯入门,WIFI..</span>
+                </li>
+                <li>
+                    <span>推荐</span>
+                    <span>华为Mate50pro,D...</span>
+                </li>
+                <li>
+                    <span>热论</span>
+                    <span>荣耀耳机XSportPr...</span>
+                </li>
+                <li>
+                    <span>热评</span>
+                    <span>小米平板5pro新品...</span>
+                </li>
+            </ul>
+        </div>
+        </div>
+        <div class="main_right_3">
+        </div>
+    </div>
+ </div>
+ <!--&lt;!&ndash; 秒杀抢购制作 &ndash;&gt;-->
+ <!--<div class="w">-->
+    <!--<div class="kill">-->
+        <!--<ul>-->
+            <!--<li><h1>拼夕夕秒杀</h1>-->
+                <!--<h4>10：00点场距结束</h4>-->
+                <!--<div class="f_kill" id = "daojishi">-->
+                    <!--<span class="hour">1</span>-->
+                    <!--<span class="minute">2</span>-->
+                    <!--<span class="second">3</span>-->
+                <!--</div>-->
+                <!--<script src="/JavaScript/index.js"></script>-->
+            <!--</li>-->
+
+
+            <!--<div id="hot-list" class="panel-body panel-item">-->
+            <!--<li>-->
+              <!--<a href="shopingcar.html?name=2">-->
+                  <!--<img src="img/kill2.png" alt="" id="text1" onmouseover="big()" onmouseout="small()" onclick="tiao()" class="hhhh">-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li><img src="img/kill4.png" alt=""></li>-->
+            <!--<li><img src="img/kill5.png" alt=""></li>-->
+            <!--<li><img src="img/kill6.png" alt=""></li>-->
+           <!--</div>-->
+
+        <!--</ul>-->
+ <!--</div>-->
+ <!--</div>-->
+
+
+
+
+
+ <!-- 商品分类的制作 -->
+ <div class="w">
+    <div class="shoping">
+        <div class="shoping_header">
+            
+        </div>
+        <ul id="selllove">
+            <a><li><img src="img/商品分类/1.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/2.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/3.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/4.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/5.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/2.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/7.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/6.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/7.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/5.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/4.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/3.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/1.png" alt=""></li></a>
+            <a><li><img src="img/商品分类/2.png" alt=""></li></a>
+        </ul>
+     </div>
+ </div>
+ <!-- 家电模块制作 -->
+ <div class="w">
+        <div class="jiadian">
+            <div class="jiadian_hd">
+               <h3>手机推荐</h3>
+               <div class="table_list">
+                <ul>
+                    <li><a href="">热门</a>|</li>
+                    <li><a href="">大家电</a>|</li>
+                    <li><a href="">生活电器</a>|</li>
+                    <li><a href="">厨房电器</a>|</li>
+                    <li><a href="">个户健康</a>|</li>
+                    <li><a href="">应季电器</a>|</li>
+                    <li><a href="">空气/净水</a>|</li>
+                    <li><a href="">新奇特</a>|</li>
+                    <li><a href="">高端电器</a>|</li>
+                  </ul>
+            </div>
+            </div>
+            <div class="jiadian_bd">
+                <div class="jiadian_bd_left">
+               <img src="img/手机模块/2.png" alt="">
+                </div>
+                <div class="jiadian_bd_right">
+                    <ul>
+                        <li>
+                           <img src="img/手机模块/10.png" alt="">
+                        </li>
+                        <li>
+                            <img src="img/手机模块/10.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/10.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/10.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/9.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/7.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/6.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/7.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/8.png" alt="">
+
+                        </li>
+                        <li>
+                            <img src="img/手机模块/9.png" alt="">
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+ </div>
+</div>
+<div class="w">
+    <div class="jiadian">
+        <div class="jiadian_hd">
+           <h3>家用电器</h3>
+           <div class="table_list">
+            <ul>
+                <li><a href="">热门</a>|</li>
+                <li><a href="">大家电</a>|</li>
+                <li><a href="">生活电器</a>|</li>
+                <li><a href="">厨房电器</a>|</li>
+                <li><a href="">个户健康</a>|</li>
+                <li><a href="">应季电器</a>|</li>
+                <li><a href="">空气/净水</a>|</li>
+                <li><a href="">新奇特</a>|</li>
+                <li><a href="">高端电器</a>|</li>
+              </ul>
+        </div>
+        </div>
+        <div class="jiadian_bd">
+            <div class="jiadian_bd_left">
+           <img src="img/手机模块/3.png" alt="">
+            </div>
+            <div class="jiadian_bd_right">
+                <ul>
+                    <li>
+                       <img src="img/手机模块/6.png" alt="">
+                    </li>
+                    <li>
+                        <img src="img/手机模块/7.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/8.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/9.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/9.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/7.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/6.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/7.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/8.png" alt="">
+
+                    </li>
+                    <li>
+                        <img src="img/手机模块/9.png" alt="">
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+</div>
+</div>
+
+
+       <!-- 为你推荐模块 -->
+       <div class="w">
+        <div class="recommend">
+              <div id="contain1">
+                 <ul>
+                    <li><img src="img/购物车/9.png" alt=""></li>
+                    <li><img src="img/购物车/5.png" alt=""></li>
+                    <li><img src="img/购物车/7.png" alt=""></li>
+                    <li><img src="img/购物车/2.png" alt=""></li>
+                    <li><img src="img/购物车/3.png" alt=""></li>
+                    <li><img src="img/购物车/4.png" alt=""></li>
+                    <li><img src="img/购物车/5.png" alt=""></li>
+                    <li><img src="img/购物车/3.png" alt=""></li>
+                    <li><img src="img/购物车/4.png" alt=""></li>
+                    <li><img src="img/购物车/5.png" alt=""></li>
+                    <li><img src="img/购物车/6.png" alt=""></li>
+                    <li><img src="img/购物车/2.png" alt=""></li>
+                    <li><img src="img/购物车/2.png" alt=""></li>
+                    <li><img src="img/购物车/3.png" alt=""></li>
+                    <li><img src="img/购物车/4.png" alt=""></li>
+                    <li><img src="img/购物车/5.png" alt=""></li>
+                    <li><img src="img/购物车/6.png" alt=""></li>
+                    <li><img src="img/购物车/2.png" alt=""></li>
+                    <li><img src="img/购物车/3.png" alt=""></li>
+                    <li><img src="img/购物车/2.png" alt=""></li>
+                  
+                    <li><img src="img/购物车/7.png" alt=""></li>
+                    <li><img src="img/购物车/8.png" alt=""></li>
+                    <li><img src="img/购物车/9.png" alt=""></li>
+               
+                    <li><img src="img/购物车/7.png" alt=""></li>
+                    <li><img src="img/购物车/8.png" alt=""></li>
+             
+                 </ul>
+              </div>
+              <div id="contain2">
+                <ol>
+                    <li>
+                        <ul>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                         </ul>
+                    </li>
+                </ol>
+              </div>
+              <div id="contain3">
+                <ol>
+                    <li>
+                        <ul>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                    
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                           
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                         </ul>                
+</li>
+                </ol>
+              </div>
+              <div id="contain4">
+                <ol>
+                    <li>
+                        <ul>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                         </ul>
+            </li>
+                </ol>
+              </div>
+              <div id="contain5">
+                <ol>
+                    <li>
+                    </li>
+                </ol>
+              </div>
+              <div id="contain6">
+                <ol>
+                    <li>
+                        <ul>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/6.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/8.png" alt=""></li>
+                            <li><img src="img/购物车/9.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                            <li><img src="img/购物车/7.png" alt=""></li>
+                            <li><img src="img/购物车/2.png" alt=""></li>
+                            <li><img src="img/购物车/3.png" alt=""></li>
+                            <li><img src="img/购物车/4.png" alt=""></li>
+                            <li><img src="img/购物车/5.png" alt=""></li>
+                         </ul>
+                    </li>
+                </ol>
+              </div>
+                <ul class="tab">
+                    <li>
+                        <a href="#contain1"> <span>精选</span>  <br> <p>猜你喜欢</p> </a>
+                    </li>
+                    <li>
+                        <a href="#contain2"> <span>智能先锋</span>  <p>大电器城</p></a>
+                    </li>
+                    <li>
+                        <a href="#contain3">  <span>居家优品</span> <p>品质生活</p></a>
+                    </li>
+                    <li>
+                        <a href="#contain4"> <span>超市百货</span>  <p>百货生鲜</p></a>
+                    </li>
+                    <li>
+                        <a href="#contain5">   <span>时尚达人</span> <p>美妆穿搭</p></a>
+                    </li>
+                    <li>
+                        <a href="#contain6">  <span>进口货物  </span> <p>京东国际</p></a>
+                    </li>
+                </ul>
+        </div>
+      </div>
+
+
+
+
+ <!-- 结尾模块的制作 -->
+ <div class="w"> 
+ <div class="footor">
+    <div class="footor_hd">
+            <ul>
+                <li>
+                   <h5></h5>
+                   <h4>正品保证</h4>
+                   <p>正品保证,提供发票</p>
+                </li>
+                <li>
+                    <h5></h5>
+                    <h4>正品保证</h4>
+                    <p>正品保证,提供发票</p>
+                </li>
+                <li>
+                    <h5></h5>
+                    <h4>正品保证</h4>
+                    <p>正品保证,提供发票</p>
+                </li>
+                <li>
+                    <h5></h5>
+                    <h4>正品保证</h4>
+                    <p>正品保证,提供发票</p>
+                </li>
+
+                <li style="margin-right:0px">
+                    <h5></h5>
+                    <h4>正品保证</h4>
+                    <p>正品保证,提供发票</p>
+                </li>
+            </ul>     
+    </div>
+    <div class="footor_bd">
+        <ul>
+            <li>
+               <h3>购物指南</h3>
+               <h4>购物流程</h4>
+               <h4>会员流程</h4>
+               <h4>常见问题</h4>
+               <h4>大家电</h4>
+               <h4>联系客服</h4>
+            </li>
+            <li>
+                <h3>购物指南</h3>
+               <h4>购物流程</h4>
+               <h4>会员流程</h4>
+               <h4>常见问题</h4>
+               <h4>大家电</h4>
+               <h4>联系客服</h4>
+            </li>
+            <li>
+                <h3>购物指南</h3>
+               <h4>购物流程</h4>
+               <h4>会员流程</h4>
+               <h4>常见问题</h4>
+               <h4>大家电</h4>
+               <h4>联系客服</h4>
+            </li>
+            <li>
+                <h3>购物指南</h3>
+               <h4>购物流程</h4>
+               <h4>会员流程</h4>
+               <h4>常见问题</h4>
+               <h4>大家电</h4>
+               <h4>联系客服</h4>
+            </li>
+            <li class="erweima">
+                <h3 style="margin-left: 0px; ">帮助中心</h3>
+                <img src="/images/wx_cz.jpg" alt="">
+                <p>客户端</p>
+            </li>
+        </ul>
+    </div>
+</div> 
+</div>
+    </div>
     <script>
-        var settings = {
+        var rolling = document.getElementById("rolling");
+        var m_unit = document.getElementById("m_unit");
+        var listul = m_unit.getElementsByTagName("ul")[0];
+        var lislength = listul.getElementsByTagName("li").length;
+        listul.innerHTML += listul.innerHTML;
+        var nowleft = 0;
+        var timer;
+        move();
+        rolling.onmouseover = function(){
+            clearInterval(timer);
+        }
+
+        //鼠标离开
+        rolling.onmouseout = function(){
+            move();
+        }
+
+        function move(){
+            //运动
+            timer = setInterval(function(){
+                nowleft -= 3;
+                if(nowleft < -210 * lislength){
+                    nowleft = 0;
+                }
+                m_unit.style.left = nowleft + "px";
+            },50);
+        }
+        var x = 1;
+function gan()
+{   
+           var a = document.getElementById('turn_imgs')
+           a.src = './img/turn' + x + '.png';
+           x = x + 1;
+           if(x == 6)
+           {
+              x = 1;
+           }
+}
+  setInterval(gan,2000);
  
-            particles: {
- 
-                length: 500, // maximum amount of particles
-                duration: 2, // particle duration in sec
-                velocity: 100, // particle velocity in pixels/sec
-                effect: -0.75, // play with this for a nice effect
-                size: 30, // particle size in pixels
-            },
-        };
-        (function () { var b = 0; var c = ["ms","moz","webkit","o"]; for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) { window.requestAnimationFrame = window[c[a] +"RequestAnimationFrame"]; window.cancelAnimationFrame = window[c[a] +"CancelAnimationFrame"]|| window[c[a] +"CancelRequestAnimationFrame"] } if (!window.requestAnimationFrame) { window.requestAnimationFrame = function (h, e) { var d = new Date().getTime(); var f = Math.max(0, 16 - (d - b)); var g = window.setTimeout(function () { h(d + f) }, f); b = d + f; return g } } if (!window.cancelAnimationFrame) { window.cancelAnimationFrame = function (d) { clearTimeout(d) } } }());
-        var Point = (function () {
-            function Point(x, y) {
-                this.x = (typeof x !== "undefined") ?x: 0;
-                this.y = (typeof y !== "undefined") ?y: 0;
-            }
-            Point.prototype.clone = function () {
-                return new Point(this.x, this.y);
-            };
-            Point.prototype.length = function (length) {
-                if (typeof length == "undefined")
-                return Math.sqrt(this.x * this.x + this.y * this.y);
-                this.normalize();
-                this.x *= length;
-                this.y *= length;
-                return this;
-            };
-            Point.prototype.normalize = function () {
-                var length = this.length();
-                this.x /= length;
-                this.y /= length;
-                return this;
-            };
-            return Point;
-        })();
-        var Particle = (function () {
- 
-            function Particle() {
-                this.position = new Point();
-                this.velocity = new Point();
-                this.acceleration = new Point();
-                this.age = 0;
-            }
-            Particle.prototype.initialize = function (x, y, dx, dy) {
-                this.position.x = x;
-                this.position.y = y;
-                this.velocity.x = dx;
-                this.velocity.y = dy;
-                this.acceleration.x = dx * settings.particles.effect;
-                this.acceleration.y = dy * settings.particles.effect;
-                this.age = 0;
-            };
-            Particle.prototype.update = function (deltaTime) {
-                this.position.x += this.velocity.x * deltaTime;
-                this.position.y += this.velocity.y * deltaTime;
-                this.velocity.x += this.acceleration.x * deltaTime;
-                this.velocity.y += this.acceleration.y * deltaTime;
-                this.age += deltaTime;
-            };
-            Particle.prototype.draw = function (context, image) {
-                function ease(t) {
-                    return (-t) * t * t + 1;
-                }
-                var size = image.width * ease(this.age / settings.particles.duration);
-                context.globalAlpha = 1 - this.age / settings.particles.duration;
-                context.drawImage(image, this.position.x - size / 2, this.position.y - size / 2, size, size);
-            };
-            return Particle;
-        })();
-        var ParticlePool = (function () {
-            var particles,
-                firstActive = 0,
-                firstFree = 0,
-                duration = settings.particles.duration;
-            function ParticlePool(length) {
-                particles = new Array(length);
-                for (var i = 0; i < particles.length; i++)
-                    particles[i] = new Particle();
-            }
-            ParticlePool.prototype.add = function (x, y, dx, dy) {
- 
-                particles[firstFree].initialize(x, y, dx, dy);
-                firstFree++;
-                if (firstFree == particles.length) firstFree = 0;
-                if (firstActive == firstFree) firstActive++;
-                if (firstActive == particles.length) firstActive = 0;
-            };
-            ParticlePool.prototype.update = function (deltaTime) {
-                var i;
-                if (firstActive < firstFree) {
-                    for (i = firstActive; i < firstFree; i++)
-                        particles[i].update(deltaTime);
-                }
-                if (firstFree < firstActive) {
-                    for (i = firstActive; i < particles.length; i++)
-                        particles[i].update(deltaTime);
-                    for (i = 0; i < firstFree; i++)
-                        particles[i].update(deltaTime);
-                }
-                while (particles[firstActive].age >= duration && firstActive != firstFree) {
-                    firstActive++;
-                    if (firstActive == particles.length) firstActive = 0;
-                }
-            };
-            ParticlePool.prototype.draw = function (context, image) {
-                if (firstActive < firstFree) {
-                    for (i = firstActive; i < firstFree; i++)
-                        particles[i].draw(context, image);
-                }
-                if (firstFree < firstActive) {
-                    for (i = firstActive; i < particles.length; i++)
-                        particles[i].draw(context, image);
-                    for (i = 0; i < firstFree; i++)
-                        particles[i].draw(context, image);
-                }
-            };
-            return ParticlePool;
-        })();
-        (function (canvas) {
-            var context = canvas.getContext("2d"),
-                particles = new ParticlePool(settings.particles.length),
-                particleRate = settings.particles.length / settings.particles.duration, // particles/sec
-                time;
-            function pointOnHeart(t) {
-                return new Point(
-                    160 * Math.pow(Math.sin(t), 3),
-                    130 * Math.cos(t) - 50 * Math.cos(2 * t) - 20 * Math.cos(3 * t) - 10 * Math.cos(4 * t) + 25
-                );
-            }
-            var image = (function () {
-                var canvas = document.createElement("canvas"),
-                    context = canvas.getContext("2d");
-                canvas.width = settings.particles.size;
-                canvas.height = settings.particles.size;
-                function to(t) {
-                    var point = pointOnHeart(t);
-                    point.x = settings.particles.size / 2 + point.x * settings.particles.size / 350;
-                    point.y = settings.particles.size / 2 - point.y * settings.particles.size / 350;
-                    return point;
-                }
-                context.beginPath();
-                var t = -Math.PI;
-                var point = to(t);
-                context.moveTo(point.x, point.y);
-                while (t < Math.PI) {
-                    t += 0.01; // baby steps!
-                    point = to(t);
-                    context.lineTo(point.x, point.y);
-                }
-                context.closePath();
-                context.fillStyle = "#ea80b0";
-                context.fill();
-                var image = new Image();
-                image.src = canvas.toDataURL();
-                return image;
-            })();
-            function render() {
-                requestAnimationFrame(render);
-                var newTime = new Date().getTime() / 1000,
-                    deltaTime = newTime - (time || newTime);
-                time = newTime;
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                var amount = particleRate * deltaTime;
-                for (var i = 0; i < amount; i++) {
-                    var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
-                    var dir = pos.clone().length(settings.particles.velocity);
-                    particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
-                }
-                particles.update(deltaTime);
-                particles.draw(context, image);
-            }
-            function onResize() {
-                canvas.width = canvas.clientWidth;
-                canvas.height = canvas.clientHeight;
-            }
-            window.onresize = onResize;
-            setTimeout(function () {
- 
-                onResize();
-                render();
-            }, 10);
-        })(document.getElementById("pinkboard"));
+function big() {
+   var x1 = document.getElementById('text1');
+   x1.style.transform = 'scale(1.15)';
+}
+function small() {
+   var x1 = document.getElementById('text1');
+   x1.style.transform = 'scale(1)';
+}
+
+
+// =========================================================
+
+        var hour = document.querySelector('.hour');
+        var minute = document.querySelector('.minute');
+        var second = document.querySelector('.second');
+        var inputTime =  + new Date("2022-12-27 09:00:00")
+        countDown();
+        setInterval(countDown,1000);
+        function countDown() {
+             var nowTime = +new Date();
+             var times = (inputTime - nowTime)/1000;
+             var h = parseInt(times/60/60%24);
+             hour.innerHTML=  h < 10 ? "0" + h : h;
+             var m = parseInt(times / 60 %60);
+             minute.innerHTML = m < 10 ? "0" + m : m;
+             var s = parseInt(times % 60);
+             second.innerHTML = s < 10 ? "0" + s : s;
+        }
+     document.querySelector('.hhhha').addEventListener("onmouseenter",function(){
+            this.style.transform = 'scale(1)';
+            alert('werwe');
+     },true)
+     document.querySelector(".tab")[0].querySelector('a')[0].click();
+
+
+
     </script>
-</BODY>
- 
-</HTML>
+
+
+    </body>
+</html>

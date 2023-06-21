@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的购物车</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/shoppingcar.css">
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script src="JavaScript/shoppingcar.js"></script>
+    <script src="bootstrap3/js/holder.js"></script>
+    <link href="bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap3/jquery-1.8.3.min.js"></script>
+    <script src="bootstrap3/js/bootstrap.js"></script>
+    <script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/JavaScript/index.js"></script>
+
+    <script>
+           var url  = window.location.href;
+           var id = url.substring(url.lastIndexOf('=')+1, url.length);
+           $(document).ready(function() {
+               $.ajax({
+                   url: "/products/" + id + "/details",
+                   type: "GET",
+                   dataType: "JSON",
+                   success: function(json) {
+                           console.log("title=" + json.data.title);
+                           $("#product-title").html(json.data.title);
+                           $("#product-sell-point").html(json.data.sellPoint);
+                           $("#product-price").html(json.data.price + "元");
+
+                           // for (var i = 1; i <= 5; i++) {
+                           //     $("#product-image-" + i).attr("src", ".." + json.data.image + i + ".jpg");
+                           // }
+                               $("#product_img").attr("src",json.data.image);
+                               $("#product_img1").attr("src",json.data.image);
+                   }
+               });
+           });
+    </script>
+</head>
+<body>
+<script>
+    var url1  = window.location.href;
+    var id1 = url1.substring(url1.lastIndexOf('=')+1, url1.length);
+
+    function add12() {
+            $.ajax({
+                url: "/cars/add_cars",
+                type: "POST",
+                data: {
+                    "pid": id1
+                },
+                dataType: "JSON",
+                success: function(json) {
+                    if (json.state == 200) {
+                        alert("增加成功！");
+                    } else {
+                        alert("增加失败！" + json.message);
+                    }
+                }
+            });
+    }
+</script>
+    <!-- 首部的制作 start-->
+<section class = "cutshort">
+    <!-- 加一个版心，放在版心里 -->
+    <div class="w">  
+     <div class="fl">
+        <ul>
+            <li>YTU欢迎您! &nbsp;</li>
+            <li>
+                <a href="">请登录</a>
+                <a href="Registe.html" class="font_style_red">免费注册</a>
+            </li>
+        </ul>
+     </div>
+    <div class="fr">
+      <ul>
+        <li>我的订单</li>
+        <li></li>
+        <li class="arrow-icon">我的YTU</li>
+        <li></li>
+        <li>YTU会员</li>
+        <li></li>
+        <li>企业采购</li>
+        <li></li>
+        <li>关注YTU</li>
+        <li></li>
+        <li>客户服务</li>
+        <li></li>
+        <li>网站导航</li>
+      </ul>
+    </div>
+    </div> 
+</section>
+<!-- 搜索栏的制作 start-->
+<div class="header w">
+    <a href="index.html"><div class="logo">
+        <img src="img/logo.webp" alt="">
+    </div></a>
+    
+    <div class="search">
+        <input type="text" placeholder = "请输入要搜索的内容">
+        <button style="border: 0px
+        ;">搜索</button>
+    </div>
+    <a href="shoppingCar2.html">
+        <div class="shopping_message">
+            我的购物车
+        </div>
+       <div class="shopping_message1">
+          <i id = "heihei">1</i>
+       </div>
+    </a>
+   
+</div>
+<!-- 导航栏制作 -->
+<div class="w">
+    <div id="nav_container">
+        <nav>
+            <ul>
+                <li><a hred="#">全部分类</a>
+                    <ul>
+                        <li><a hred="#">apple手机</a></li>
+                        <li><a hred="#">小米手机</a></li>
+                    </ul>
+                </li>
+               
+                <li><a hred="#">Apple手机</a>
+                    <ul>
+                        <li><a hred="#">小米手机</a></li>
+                        <li><a hred="#">小米手机</a></li>
+                        <li><a hred="#">华为手机</a></li>
+                    </ul>
+                </li>
+                <li><a hred="#">OPPO专区</a>
+                    <ul>
+                        <li><a hred="#">OPPO 12x</a></li>
+                        <li><a hred="#">OPPO 10s</a></li>
+                        <li><a hred="#">华为手机</a></li>
+                    </ul>
+                </li>
+                <li><a hred="#">荣耀专区</a>
+                </li>
+                <li><a hred="#">手机</a>
+                </li>
+                <li><a hred="#">小米平板</a>
+                    <ul>
+                        <li><a hred="#">小米5</a></li>
+                        <li><a hred="#">小米6s</a></li>
+                    </ul>
+                </li>
+               
+                <li><a hred="#">真我专区</a>
+                    <ul>
+                        <li><a hred="#">小米pro5</a></li>
+                        <li><a hred="#">
+                            华为 nova7se
+                        </a></li>
+                        <li><a hred="#">小米K50</a></li>
+                    </ul>
+                </li>
+               
+            </ul>
+        </nav>
+        
+    </div>
+</div>
+
+<!-- 主页的制作 -->
+<div class="w">
+  <div class="s_main">
+      <div class="s_main_left">
+         <div class="s_main_left_top" >
+              <img src="img/kill4.png" id="product_img">
+              <div class="mask">
+              </div>
+              <!-- 黄色背景 -->
+              <div class="big">
+                <img src="img/购物车/1.png" alt="" class="big_img" id="product_img1">
+              </div>
+         </div>
+
+         <div class="s_main_left_center">
+            <ul>
+                <li><img src="img/电影/1.1.png" alt=""></li>
+                <li><img src="img/电影/1.2.png" alt=""></li>
+                <li><img src="img/电影/1.3.png" alt=""></li>
+                <li><img src="img/电影/1.1.png" alt=""></li>
+            </ul>
+        </div>
+        <div class="s_main_left_bottom">
+             <p>关注</p>
+             <p>对比</p>
+             <p>举报</p>
+        </div>
+      </div>
+
+
+      <div class="s_main_center">
+        <ul>
+            <li>
+                    <h2 id="product-title">【12期免息可选】华为nova9se 旗舰新品手机 冰晶蓝 【8GB+128GB】
+                    </h2>
+                    <h4 style="color:red;" id="product-sell-point">【华为nova9se】,搭载HarmonyOS2,66W超级快充;华为手机热销爆款,收货后咨询客服领取非原装充电套装
+                    </h4>
+            </li>
+            <li>
+                <div class="s_main_center_price">
+                    <span >京东价  </span>  <span style="color:crimson; font-size: 30px;" id="product-price">1499.00元</span>
+                    <p>优惠卷 </p>
+                    <span>促 &nbsp  &nbsp销 </span> <span><span id = "qweqwe"> 限购</span> 购买1-5件时享受单件价￥1499,超出数量以结算价为准</span>
+                    <div class="s_main_center_remark">
+                        <span>累计评论5000+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span style="display: inline-block; margin-top: 20px;">增值业务</span>
+                <span >高价回收急速到账</span>
+            </li>
+            <li>
+                <span style="margin-right: 4px;">配&nbsp送&nbsp至</span>
+                <div class="s_main_center_address">
+                    <select>
+                        <option value="">山东市-烟台市-莱山区-港城东大街</option>
+                    </select>
+                    <span>有货支持
+                        可配送全球&nbsp|&nbsp&nbsp爱心东东&nbsp|&nbsp&nbsp退换货运费险&nbsp&nbsp|&nbsp&nbsp一年质保
+                        免运费 </span>
+                </div>
+                <p>由从 广东深圳市 发货, 并提供售后服务. 今日16:00前完成下单，预计11月17日18:00前发货，11月20日24:00前送达</p>
+            </li>
+            <div class="fengexian"></div>
+            <li>
+                <div class="s_main_center_color">
+                    <div class="s_main_center_color_left">
+                        选择颜色
+                    </div>
+                    <div class="s_main_center_color_right">
+                        <ul class="p_color">
+                            <li>
+                            幻夜黑
+                            </li>
+                            <li class="p_color2">
+                            贝母白
+                            </li>
+                            <li>
+                            冰晶蓝                     
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <li>
+                <div class="s_main_center_version">
+                    <div class="s_main_center_version_left">
+                        选择型号
+                    </div>
+                    <div class="s_main_center_version_right">
+                        <ul>
+                            <li>
+                                8GB+1238GB
+                            </li>
+                            <li>
+                                8GB+1238GB
+                            </li>
+                            <li>
+                                8GB+1238GB
+                            </li>
+                
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <li>
+                <div class="s_main_center_version">
+                    <div class="s_main_center_version_left">
+                        选择版本
+                    </div>
+                    <div class="s_main_center_version_right">
+                        <ul>
+                            <li style="width: 120px;">
+                                有线版
+                            </li>
+                            <li style="width: 120px;">
+                                快充版
+                            </li>
+                            <li style="width: 120px;">
+                                秒杀版
+                            </li>
+                
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <li>
+                <div class="s_main_center_version">
+                    <div class="s_main_center_version_left">
+                       购买方式
+                    </div>
+                    <div class="s_main_center_version_right">
+                        <ul>
+                            <li>
+                                官方标配
+                            </li>
+                            
+                
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <li>
+                <div class="s_main_center_version">
+                    <div class="s_main_center_version_left">
+                     套装
+                    </div>
+                    <div class="s_main_center_version_right">
+                        <ul>
+                            <li>
+                                优惠套装1
+                            </li>
+                            <li>
+                                优惠套装2
+
+                            </li>
+                            <li>
+                                优惠套装3
+
+                            </li>
+                  <li>
+                    优惠套装4
+
+                  </li>
+                        <li>
+                            优惠套装5
+
+                        </li>    
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <li>
+                <div class="s_main_center_version">
+                    <div class="s_main_center_version_left">
+                        精选服务
+                    </div>
+                    <div class="s_main_center_version_right">
+                        <ul>
+                            <li>
+                                1年碎屏宝 
+                            </li>
+                            <li>
+                                1年碎屏宝 
+                            </li>
+                            <li>
+                                1年碎屏宝 
+                            </li>
+                
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <li>
+                <div class="s_main_center_version">
+                    <div class="s_main_center_version_left">
+                        京东服务
+                    </div>
+                    <div class="s_main_center_version_right">
+                        <ul>
+                            <li style="width: 170px;">
+                                一年充电特权 ￥129.00 
+                            </li>
+                            <li style="width: 170px;">
+                                一年充电特权 ￥129.00 
+                          
+                        </ul>
+                    </div>
+                    
+                </div>
+            </li>
+            <div class="fengexian">
+
+            </div>
+
+
+            <li>
+                <div class="s_main_center_shopping">
+                    <div class="s_main_center_shopping_left">
+
+                    </div>
+                    <span  class="shuliang">请选择 <br> 数量：</span>
+                    <div class="s_main_center_shopping_right">
+                         <div class="s_main_center_shopping_right_jishu">
+                            
+                         </div>
+                        <div class="jishu">
+                            <div class="jishushang" onclick="jia()" >
+                                +
+                            </div>
+                            <div class="jishuzhong">
+                                <input type="text" id = "jishuzhong1" value="1">
+                            </div>
+                            <div class="jishuxia" onclick="jian()">
+                             -
+                            </div>
+                        </div>
+                            <button type="submit" onclick="add12()">
+                                加入购物车
+                            </button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                
+            </li>
+        </ul>
+      </div>
+   <div/>
+      <div/>
+
+
+
+      <script>
+                //得到元素
+                var rolling = document.getElementById("rolling1");
+                var m_unit = document.getElementById("m_unit1");
+                var listul = m_unit.getElementsByTagName("ul")[0];
+                //得到图片的数量，计算折返点用的，折返点就是210 * 图片数量
+                var lislength = listul.getElementsByTagName("li").length;
+        
+                //复制一倍的li  最笨的办法直接把 li 在写一遍
+                listul.innerHTML += listul.innerHTML;
+        
+                //信号量
+                var nowleft = 0;
+                var timer;
+                
+                //默认调用move
+                move();
+                
+                //鼠标进入
+                rolling.onmouseover = function(){
+                    clearInterval(timer);
+                }
+        
+                //鼠标离开
+                rolling.onmouseout = function(){
+                    move();
+                }
+        
+                function move(){
+                    //运动
+                    timer = setInterval(function(){
+                        nowleft -= 3;
+                        if(nowleft < -210 * lislength){
+                            nowleft = 0;
+                        }
+                        m_unit.style.left = nowleft + "px";
+                    },30);
+                }
+            </script>
+        </div>
+      </div>
+  </div>
+</div>
+
+    <!-- foor模块的制作 -->
+    <div class="w">
+        <div class="footor">
+           <div class="footor_hd">
+                   <ul>
+                       <li>
+                          <h5></h5>
+                          <h4>正品保证</h4>
+                          <p>正品保证,提供发票</p>
+                       </li>
+                       <li>
+                           <h5></h5>
+                           <h4>正品保证</h4>
+                           <p>正品保证,提供发票</p>
+                       </li>
+                       <li>
+                           <h5></h5>
+                           <h4>正品保证</h4>
+                           <p>正品保证,提供发票</p>
+                       </li>
+                       <li>
+                           <h5></h5>
+                           <h4>正品保证</h4>
+                           <p>正品保证,提供发票</p>
+                       </li>
+       
+                       <li style="margin-right:0px">
+                           <h5></h5>
+                           <h4>正品保证</h4>
+                           <p>正品保证,提供发票</p>
+                       </li>
+                   </ul>     
+           </div>
+           <div class="footor_bd">
+               <ul>
+                   <li>
+                      <h3>购物指南</h3>
+                      <h4>购物流程</h4>
+                      <h4>会员流程</h4>
+                      <h4>常见问题</h4>
+                      <h4>大家电</h4>
+                      <h4>联系客服</h4>
+                   </li>
+                   <li>
+                       <h3>购物指南</h3>
+                      <h4>购物流程</h4>
+                      <h4>会员流程</h4>
+                      <h4>常见问题</h4>
+                      <h4>大家电</h4>
+                      <h4>联系客服</h4>
+                   </li>
+                   <li>
+                       <h3>购物指南</h3>
+                      <h4>购物流程</h4>
+                      <h4>会员流程</h4>
+                      <h4>常见问题</h4>
+                      <h4>大家电</h4>
+                      <h4>联系客服</h4>
+                   </li>
+                   <li>
+                       <h3>购物指南</h3>
+                      <h4>购物流程</h4>
+                      <h4>会员流程</h4>
+                      <h4>常见问题</h4>
+                      <h4>大家电</h4>
+                      <h4>联系客服</h4>
+                   </li>
+                   <li class="erweima">
+                       <h3 style="margin-left: 0px; ">帮助中心</h3>
+                       <img src="/images/wx_cz.jpg" alt="">
+                       <p>品优购客户端</p>
+                   </li>
+               </ul>
+           </div>
+       </div></div>
+    <script>
+        function jia(){
+            document.getElementById("jishuzhong1").value ++ ;
+        }
+        function jian() {
+            if(document.getElementById("jishuzhong1").value == 0){
+                    return;
+            }
+            document.getElementById("jishuzhong1").value -- ;
+          
+        }
+        var jishuzhi = 1;
+        function add() {
+             jishuzhi = jishuzhi + 1;
+             var heihei =  document.querySelector('#heihei');
+             heihei.innerHTML = jishuzhi + 1;
+        }
+        var p_color1 = document.querySelector('.p_color li');
+        var p_color2 = document.querySelector('.p_color2');
+        p_color1.onclick = function() {
+            p_color1.style.border = "1px solid red";
+        }
+        p_color2.onclick = function() {
+            p_color2.style.border = "1px solid red";
+            p_color1.style.border = "1px solid gray";
+        }
+    </script>
+</body>
+</html>

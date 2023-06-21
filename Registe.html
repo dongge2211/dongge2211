@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimun-scale=1,maximun-scale=1,user-scalable=no"/>
+    <title>欢迎注册</title>
+    <style>
+        .w {
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        body {
+            background-size: cover;
+        }
+
+        .resigter {
+            margin-top: 0px;
+            margin-left: 300px;
+            width: 600px;
+            background-color:#fff;
+        }
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            margin-top: 20px;
+            font-size: large;
+            margin-left: 90px;
+        }
+
+        .logo {
+            margin-left: 430px;
+            width: 300px;
+            font-size: 49px;
+            font-family: 'KAITI';
+            color: azure;
+        }
+
+        h3 {
+            height: 42px;
+            border-bottom: 1px solid gray;
+            background-color: #ccc;
+            line-height: 42px;
+        }
+
+        .resigter input {
+            width: 242px;
+            height: 37px;
+            border: 1px solid #ccc;
+        }
+
+        .logoen {
+            float: right;
+        }
+
+
+        .safe i {
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
+        }
+
+        .safe {
+            margin-top: 3px;
+            margin-left: 100px;
+            font-size: 12px;
+        }
+        .R_header {
+            font-weight: 550;
+            text-align: center;
+            font-size: 30px;
+            font-family: '';
+            margin-top: 40px;
+            padding:30px 30px;
+        }
+        #r_adress {
+            background-color: black;
+        }
+        body {
+            background-color: aliceblue;
+        }
+        .r_nav{
+            width: 1200px;
+            height: 100px;
+            margin: 0px auto;
+            border-bottom: 4px solid crimson;
+            padding-bottom: 20px;
+        }
+        .logo {
+            width: 180px;
+            height: 100px;
+            margin-left: 100px;
+        }
+        .logo img {
+            width: 190px;
+            height: 130px;
+        }
+        .r_submit {
+            width: 191px;
+            height: 40px;
+            background-color: crimson;
+            border: 0px;
+            margin-left: 200px;
+            color: #fff;
+            font-weight: 600;
+            border: 0px solid black;
+        }
+        body {
+            background: url("img/logbg.png");
+        }
+        .main form{
+            background-color: transparent;
+        }
+        .main {
+            background-color: transparent;
+        }
+        .R_header{
+            color: whitesmoke;
+        }
+        .R_header li {
+             color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="r_nav">
+        <div class="logo">
+            <img src="img/logo.webp" alt="123">
+        </div>
+    </div>
+    <div class="w">
+        <div class="bcg">
+            
+        </div>
+        <div class="main">
+            <form action="/login/register" method="post" class="resigter">
+                <ul>
+                    <div class="R_header">手机注册</div>
+                    <li> 昵称： &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<input type="text" name="LittleName"> <br></li>
+                    <li> 账号： &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<input type="text" name="UserName"> <br>
+                    <li> 密码： &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; <input type="password" id = "passwords" name="PassWord"> <br>
+                    </li>
+                    <li> 手机号：&nbsp;&nbsp; &nbsp; &nbsp;<input type="text" name="PhoneNumber"> <br>
+                    </li>
+                </ul>
+                <input type="submit" value="注册账号"   class="r_submit"/>
+            </form>
+        </div>
+
+    </div>
+  <script>
+     function nosafe(){
+        var password =  form.passwords.value; 
+        alert(password);
+     }
+  </script>
+</body>
+
+</html>

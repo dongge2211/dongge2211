@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div style="width:600px;height:100%;margin-left:270px;">
+    <form action="/manner/add2" method="post">
+        商品编号：<input class="form-control" type="text" th:value="${id}" name="id"><br>
+        分类： <input class="form-control" type="text" th:value="${categoryId}" name="categoryId"><br>
+        商品名称：<input class="form-control" type="text" th:value="${item_type}" name="item_type"><br>
+        商品的介绍： <input class="form-control" type="text" th:value="${title}" name="title"><br>
+        卖 点：<input class="form-control" type="text" th:value="${sell_point}" name="sell_point"><br>
+        价 格： <input class="form-control" type="text" th:value="${price}" name="price"><br>
+        库 存： <input class="form-control" type="text" th:value="${price}" name="num"><br>
+        照 片： <input class="form-control" type="text" th:value="${price}" name="image"><br>
+        优先级： <input class="form-control" type="text" th:value="${priority}" name="priority"><br>
+        <button class="btn btn-primary btn-lg btn-block">保存</button>
+    </form>
+</div>
+
+</body>
+</html>
